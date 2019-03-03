@@ -14,11 +14,11 @@ public class SecondActivity extends AppCompatActivity implements DetailFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        Intent intent = getIntent();
 
-        String name = intent.getStringExtra(EchinodermViewHolder.ANIMAL_KEY);
-        String image = intent.getStringExtra(EchinodermViewHolder.IMAGE_KEY);
-        String website = intent.getStringExtra(EchinodermViewHolder.WIKI_KEY);
+        Intent intent = getIntent();
+        final String name = intent.getStringExtra(EchinodermViewHolder.ANIMAL_KEY);
+        final String image = intent.getStringExtra(EchinodermViewHolder.IMAGE_KEY);
+        final String website = intent.getStringExtra(EchinodermViewHolder.WIKI_KEY);
 
         final DetailFragment detailFragment = DetailFragment.newInstance(name, image, website);
         getSupportFragmentManager()
@@ -32,7 +32,7 @@ public class SecondActivity extends AppCompatActivity implements DetailFragment.
     @Override
     public void onFragmentInteraction(String website) {
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
         startActivity(intent);
     }
 }

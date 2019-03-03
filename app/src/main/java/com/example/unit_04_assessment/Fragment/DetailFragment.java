@@ -25,13 +25,10 @@ public class DetailFragment extends Fragment {
     private static final String ANIMAL_IMAGE = "image";
     private static final String ANIMAL_WIKI = "wiki";
     private View view;
-    private DetailFragment.OnfragmetInteractionListener mListener;
-
+    private OnfragmetInteractionListener mListener;
+    private String animalName;
     private String animalImage;
     private String animalWiki;
-    private TextView textView;
-    private ImageView imageView;
-    private Button button;
 
     public static DetailFragment newInstance(String name, String image, String wiki) {
         DetailFragment detailFragment = new DetailFragment();
@@ -50,7 +47,7 @@ public class DetailFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof DetailFragment.OnfragmetInteractionListener) {
+        if (context instanceof OnfragmetInteractionListener) {
             mListener = (OnfragmetInteractionListener) context;
         } else {
             throw new ClassCastException(context.toString()
@@ -63,9 +60,9 @@ public class DetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String animalName = getArguments().getString(ANIMAL_NAME);
+            animalName = getArguments().getString(ANIMAL_NAME);
             animalImage = getArguments().getString(ANIMAL_IMAGE);
-            String animalWiki = getArguments().getString(ANIMAL_WIKI);
+            animalWiki = getArguments().getString(ANIMAL_WIKI);
         }
     }
 
@@ -80,12 +77,13 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final TextView nameView = view.findViewById(R.id.textview_fragmentdetail);
-        final ImageView imageView = view.findViewById(R.id.image_item_view);
+        final ImageView imageView = view.findViewById(R.id.image_fragmentdetail);
         final Button button = view.findViewById(R.id.button_fragmentdetail);
 
-        nameView.setText(ANIMAL_NAME);
+        nameView.setText(animalName);
 
-        Picasso.get().load(animalImage)
+        Picasso.get()
+                .load(animalImage)
                 .into(imageView);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

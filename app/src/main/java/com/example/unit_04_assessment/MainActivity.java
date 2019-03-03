@@ -21,15 +21,14 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.echinoderm_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        final RecyclerView recyclerView = findViewById(R.id.echinoderm_recyclerview);
+
 
         final Retrofit retrofit = RetrofitSingleton.newInstance();
         EchinodermService service = retrofit.create(EchinodermService.class);
